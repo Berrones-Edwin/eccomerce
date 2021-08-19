@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Product } from '../interfaces/Product'
-import { getAllProducts } from '../services/getAllProducts'
+import useGetAllProducts from '../hooks/useGetAllProducts'
 
 function HomeScreen() {
-  const [prodcuts, setProdcuts] = useState<Product[]>([])
-  useEffect(() => {
-    getAllProducts().then(setProdcuts)
-  }, [])
-  if (prodcuts.length === 0) return <p>The products is empty!!</p>
+  const { products, loading, error } = useGetAllProducts()
+
+  if (error) return <p>Upps. An Error ocurred</p>
+  if (loading) return <p>Loading Data....</p>
+  if (products.length === 0) return <p>The products is empty!!</p>
 
   return (
     <>
       <h3>My products</h3>
-      {prodcuts.map((product) => (
+      {products.map((product) => (
         <article key={product.id}>
           <Link to={`/products/${product.id}`}>
             <img
