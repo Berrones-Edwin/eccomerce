@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Product } from '../interfaces/Product'
 import { getAllProducts } from '../services/getAllProducts'
 
@@ -14,17 +15,21 @@ function HomeScreen() {
       <h3>My products</h3>
       {prodcuts.map((product) => (
         <article key={product.id}>
-          <img
-            src={product.image}
-            alt={product.title}
-            height="100"
-            width="100"
-            loading="lazy"
-          />
-          <h3>{product.title}</h3>
+          <Link to={`/products/${product.id}`}>
+            <img
+              src={product.image}
+              alt={product.title}
+              height="100"
+              width="100"
+              loading="lazy"
+            />
+            <h3>{product.title}</h3>
+          </Link>
           <p>{product.description}</p>
           <span>
-            <p> Category {product.category}</p>
+            <Link to={`/products/category/${product.category}`}>
+              <p> Category {product.category}</p>
+            </Link>
             <b>{product.price}</b>
           </span>
         </article>

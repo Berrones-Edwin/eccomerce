@@ -5,14 +5,11 @@ import { Product } from '../interfaces/Product'
 
 type shortResult = 'desc' | 'asc'
 interface getAllProductInterface {
-  limit: number
-  short: shortResult
+  limit?: number
+  short?: shortResult
 }
-export const getAllProducts = ({
-  limit = 20,
-  short = 'desc'
-}: getAllProductInterface): Promise<Product[]> => {
-  return fetch(`${BASE_URL_API}products?limit=${limit}&sort=${short}`)
+export const getAllProducts = (): Promise<Product[]> => {
+  return fetch(`${BASE_URL_API}products`)
     .then((res) => {
       if (res.ok) return res.json()
       Promise.reject(new Error('Error! The request has failed!'))
