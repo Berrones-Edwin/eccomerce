@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useGetAllProducts from '../hooks/useGetAllProducts'
+import { Product } from '../interfaces/Product'
 
 function HomeScreen() {
   const { products, loading, error } = useGetAllProducts()
@@ -8,6 +9,10 @@ function HomeScreen() {
   if (error) return <p>Upps. An Error ocurred</p>
   if (loading) return <p>Loading Data....</p>
   if (products.length === 0) return <p>The products is empty!!</p>
+
+  const handleAddToCartProduct = (product: Product) => {
+    console.log({ product: product.title })
+  }
 
   return (
     <>
@@ -31,6 +36,14 @@ function HomeScreen() {
             </Link>
             <b>{product.price}</b>
           </span>
+          <section>
+            <button
+              disabled={true}
+              onClick={() => handleAddToCartProduct(product)}
+            >
+              add to cart
+            </button>
+          </section>
         </article>
       ))}
     </>
