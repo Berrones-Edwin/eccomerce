@@ -6,6 +6,8 @@ import CartScreen from '../pages/CartScreen'
 import SingleProduct from '../pages/SingleProductScreen'
 import ProductsCategorySpecify from '../pages/ProductsCategorySpecifyScreen'
 import Navbar from '../components/Navbar'
+import LoginScreen from '../pages/LoginScreen'
+import RegisterScreen from '../pages/RegisterScreen'
 
 import ProductsContextProvider from '../context/ProductsContextProvider'
 
@@ -24,6 +26,8 @@ const AppRoutes = () => {
             component={ProductsCategorySpecify}
           />
           <Route path="/cart" exact component={CartScreen} />
+          <Route path="/login" exact component={LoginScreen} />
+          <Route path="/register" exact component={RegisterScreen} />
         </Switch>
       </ProductsContextProvider>
     </Router>

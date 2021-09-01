@@ -37,11 +37,8 @@ function HomeScreen() {
             <b>{product.price}</b>
           </span>
           <section>
-            <button
-              disabled={true}
-              onClick={() => handleAddToCartProduct(product)}
-            >
-              add to cart
+            <button onClick={() => handleAddToCartProduct(product)}>
+              Add to cart
             </button>
           </section>
         </article>
