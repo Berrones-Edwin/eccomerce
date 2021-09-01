@@ -5,8 +5,9 @@ import useGetSingleProduct from '../hooks/useGetSingleProduct'
 interface SingleProductInterface {
   id: string | undefined
 }
-const SingleProduct = () => {
+const SingleProductScreen = () => {
   const { id } = useParams<SingleProductInterface>()
+  console.log({ id })
   const { singleProduct: product, loading, error } = useGetSingleProduct({ id })
 
   if (error) return <p>Upps. An Error ocurred</p>
@@ -35,4 +36,4 @@ const SingleProduct = () => {
   )
 }
 
-export default SingleProduct
+export default SingleProductScreen
