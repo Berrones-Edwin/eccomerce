@@ -1,5 +1,6 @@
 import React from 'react'
 import { Stack, Heading, Button } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import { categories } from '../data/categories'
 const SideBar = () => {
   return (
@@ -24,7 +25,13 @@ const SideBar = () => {
         align={'center'}
       >
         {categories.map((category) => (
-          <Button key={category.id}>{category.name}</Button>
+          <Button
+            to={`/products/category/${category.name}`}
+            as={Link}
+            key={category.id}
+          >
+            {category.name}
+          </Button>
         ))}
       </Stack>
     </Stack>

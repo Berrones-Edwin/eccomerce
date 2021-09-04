@@ -10,8 +10,10 @@ import {
   Badge,
   Button,
   Box,
+  IconButton,
   Link as LinkChakra
 } from '@chakra-ui/react'
+import { FaHeart } from 'react-icons/fa'
 
 const ProductComponent = ({ product }: { product: Product }) => {
   const { setCartProducts } = useCart()
@@ -30,7 +32,23 @@ const ProductComponent = ({ product }: { product: Product }) => {
       padding={5}
       shadow={'md'}
       height={'450px'}
+      pos={'relative'}
     >
+      <IconButton
+        variant="outline"
+        aria-label="Add to Favorite"
+        icon={<FaHeart />}
+        size={'md'}
+        pos={'absolute'}
+        top={'5px'}
+        right={'5px'}
+        color={'gray.500'}
+        _hover={{
+          color: 'red.500'
+        }}
+        z-index={1}
+        border={0}
+      />
       <Stack borderRadius={'15px'} width={'100%'} height={'250px'}>
         <LinkChakra as={Link} to={`/products/${id}`} height={'100%'}>
           <Image
