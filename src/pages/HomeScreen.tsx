@@ -1,5 +1,7 @@
 import React from 'react'
 import GridProducts from '../components/GridProducts'
+import SideBar from '../components/SideBar'
+import { Stack } from '@chakra-ui/react'
 import useGetAllProducts from '../hooks/useGetAllProducts'
 
 function HomeScreen() {
@@ -11,8 +13,20 @@ function HomeScreen() {
 
   return (
     <>
-      <h3>My products</h3>
-      <GridProducts products={products} />
+      <Stack
+        as={'section'}
+        direction={{
+          base: 'column',
+          md: 'row'
+        }}
+        align={{
+          base: 'center',
+          md: 'flex-start'
+        }}
+      >
+        <GridProducts products={products} />
+        <SideBar />
+      </Stack>
     </>
   )
 }
