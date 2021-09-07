@@ -29,25 +29,13 @@ interface NavItem {
   label: string
   subLabel?: string
   children?: Array<NavItem>
-  href?: string
+  href?: string | unknown
 }
 
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Home',
     href: '/'
-    // children: [
-    //   {
-    //     label: 'Explore Design Work',
-    //     subLabel: 'Trending Design to inspire you',
-    //     href: '#'
-    //   },
-    //   {
-    //     label: 'New & Noteworthy',
-    //     subLabel: 'Up-and-coming Designers',
-    //     href: '#'
-    //   }
-    // ]
   },
   {
     label: 'Categories',
@@ -55,22 +43,22 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'Electronics',
         subLabel: 'Trending Design to inspire you',
-        href: '#'
+        href: '/products/category/electronics'
       },
       {
         label: 'Jewelery',
         subLabel: 'Trending Design to inspire you',
-        href: '#'
+        href: '/products/category/jewelery'
       },
       {
         label: 'Men clothing',
         subLabel: 'Trending Design to inspire you',
-        href: '#'
+        href: '/products/category/men'
       },
       {
         label: 'Women clothing',
         subLabel: 'Trending Design to inspire you',
-        href: '#'
+        href: '/products/category/women'
       }
     ]
   },
@@ -103,7 +91,8 @@ const NAV_ITEMS: Array<NavItem> = [
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Link
-      href={href}
+      as={LinkRouter}
+      to={href}
       role={'group'}
       display={'block'}
       p={2}
