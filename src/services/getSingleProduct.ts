@@ -7,7 +7,6 @@ interface getSingleProductInterface {
 export const getSingleProduct = ({
   id
 }: getSingleProductInterface): Promise<Product> => {
-  console.log({ id })
   return fetch(`${BASE_URL_API}products/${id}`)
     .then((res) => {
       if (res.ok) return res.json()

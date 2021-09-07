@@ -23,6 +23,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon
 } from '@chakra-ui/icons'
+import { Link as LinkRouter } from 'react-router-dom'
 
 interface NavItem {
   label: string
@@ -33,37 +34,64 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'Home',
+    href: '/'
+    // children: [
+    //   {
+    //     label: 'Explore Design Work',
+    //     subLabel: 'Trending Design to inspire you',
+    //     href: '#'
+    //   },
+    //   {
+    //     label: 'New & Noteworthy',
+    //     subLabel: 'Up-and-coming Designers',
+    //     href: '#'
+    //   }
+    // ]
+  },
+  {
+    label: 'Categories',
     children: [
       {
-        label: 'Explore Design Work',
+        label: 'Electronics',
         subLabel: 'Trending Design to inspire you',
         href: '#'
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#'
-      }
-    ]
-  },
-  {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Jewelery',
+        subLabel: 'Trending Design to inspire you',
         href: '#'
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Men clothing',
+        subLabel: 'Trending Design to inspire you',
+        href: '#'
+      },
+      {
+        label: 'Women clothing',
+        subLabel: 'Trending Design to inspire you',
         href: '#'
       }
     ]
   },
   {
-    label: 'Learn Design',
+    label: 'Cart'
+
+    // children: [
+    //   {
+    //     label: 'Job Board',
+    //     subLabel: 'Find your dream design job',
+    //     href: '#'
+    //   },
+    //   {
+    //     label: 'Freelance Projects',
+    //     subLabel: 'An exclusive list for contract work',
+    //     href: '#'
+    //   }
+    // ]
+  },
+  {
+    label: 'WishList',
     href: '#'
   },
   {
@@ -121,8 +149,9 @@ const DesktopNav = () => {
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Link
+                as={LinkRouter}
                 p={2}
-                href={navItem.href ?? '#'}
+                to={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}

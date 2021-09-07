@@ -7,8 +7,7 @@ interface SingleProductInterface {
 }
 const SingleProductScreen = () => {
   const { id } = useParams<SingleProductInterface>()
-  console.log({ id })
-  const { singleProduct: product, loading, error } = useGetSingleProduct({ id })
+  const { product, loading, error } = useGetSingleProduct({ id })
 
   if (error) return <p>Upps. An Error ocurred</p>
   if (loading) return <p>Loading Data....</p>

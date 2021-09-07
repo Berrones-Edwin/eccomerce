@@ -75,7 +75,14 @@ const ProductComponent = ({ product }: { product: Product }) => {
         </span>
       </Box>
       <Stack width={'100%'}>
-        <Button onClick={() => handleAddToCartProduct({ product })}>
+        <Button
+          color={'white'}
+          bgColor={'secondary'}
+          _hover={{
+            bgColor: 'secondaryAlt'
+          }}
+          onClick={() => handleAddToCartProduct({ product })}
+        >
           Add to cart
         </Button>
       </Stack>

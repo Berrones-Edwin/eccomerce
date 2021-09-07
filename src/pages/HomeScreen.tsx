@@ -6,6 +6,7 @@ import useGetAllProducts from '../hooks/useGetAllProducts'
 
 function HomeScreen() {
   const { products, loading, error } = useGetAllProducts()
+  console.log(loading)
 
   if (error) return <p>Upps. An Error ocurred</p>
   if (loading) return <p>Loading Data....</p>

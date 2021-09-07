@@ -3,33 +3,50 @@ import { ProductsContext } from '../context/ProductsContextProvider'
 import { Product } from '../interfaces/Product'
 import { getSingleProduct } from '../services/getSingleProduct'
 
+type getDetailsProductType = {
+  setProduct: React.Dispatch<React.SetStateAction<Product | undefined>>
+  setloading: React.Dispatch<React.SetStateAction<boolean>>
+  setError: React.Dispatch<React.SetStateAction<null>>
+  id: string | undefined
+}
+function getDetailsProduct({
+  setProduct,
+  setloading,
+  setError,
+  id
+}: getDetailsProductType) {
+  setloading(true)
+  getSingleProduct({ id: Number(id) })
+    .then((res) => {
+      setloading(false)
+      setProduct(res)
+    })
+    .catch((err) => {
+      setError(err)
+      setloading(false)
+    })
+}
+
 const useGetSingleProduct = ({ id }: { id: string | undefined }) => {
   const { products } = useContext(ProductsContext)
 
+  const [product, setProduct] = useState<Product>()
   const [loading, setloading] = useState(false)
   const [error, setError] = useState(null)
 
-  let singleProduct: Product | undefined = products.find(
-    (product: Product) => product.id.toString() === id
-  )
-
   useEffect(() => {
-    if (!singleProduct) {
-      setloading(true)
-      getSingleProduct({ id: Number(id) })
-        .then((res) => {
-          setloading(false)
-          singleProduct = res
-        })
-        .catch((err) => {
-          setError(err)
-          setloading(false)
-        })
+    const productExist = products.some((p) => p.id.toString() === id)
+    if (!productExist) {
+      getDetailsProduct({ setProduct, setloading, setError, id })
+    } else {
+      products.forEach((p) => {
+        if (p.id.toString() === id) setProduct(p)
+      })
     }
   }, [id])
 
   return {
-    singleProduct,
+    product,
     loading,
     error
   }

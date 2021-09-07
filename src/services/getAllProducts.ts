@@ -1,4 +1,3 @@
-import { BASE_URL_API } from '../enviroment/env'
 import { Product } from '../interfaces/Product'
 
 // https://dribbble.com/shots/15848860-OYOTEE-Plant-Shop-Website/attachments/7669280?mode=media
@@ -8,8 +7,12 @@ import { Product } from '../interfaces/Product'
 //   limit?: number
 //   short?: shortResult
 // }
-export const getAllProducts = (): Promise<Product[]> => {
-  return fetch(`${BASE_URL_API}products`)
+export const getAllProducts = ({
+  url = ''
+}: {
+  url: string
+}): Promise<Product[]> => {
+  return fetch(url)
     .then((res) => {
       if (res.ok) return res.json()
       Promise.reject(new Error('Error! The request has failed!'))
