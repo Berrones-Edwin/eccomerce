@@ -294,11 +294,11 @@ export default function NavBar() {
           spacing={6}
         >
           <Button
-            as={'a'}
+            as={LinkRouter}
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'#'}
+            to={'/login'}
           >
             Sign In
           </Button>
@@ -308,7 +308,8 @@ export default function NavBar() {
             fontWeight={600}
             color={'white'}
             bg={'pink.400'}
-            href={'#'}
+            as={LinkRouter}
+            to={'/register'}
             _hover={{
               bg: 'pink.300'
             }}
