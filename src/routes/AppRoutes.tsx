@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import HomeScreen from '../pages/HomeScreen'
@@ -9,48 +9,44 @@ import Navbar from '../components/Navbar'
 import LoginScreen from '../pages/LoginScreen'
 import RegisterScreen from '../pages/RegisterScreen'
 import Error404Screen from '../pages/Error404Screen'
-
-import ProductsContextProvider from '../context/ProductsContextProvider'
-import CartContextProvider from '../context/CartContextProvider'
-import { useUser } from '../hooks/useUSer'
-import UserContextProvider from '../context/UserContextProvider'
-
-const token = JSON.stringify(localStorage.getItem('token'))
+import { useUser } from '../hooks/useUser'
+import PublicRoute from './PublicRoute'
+import PrivateRoute from './PrivateRoute'
+import { UserContext } from '../context/UserContextProvider'
 
 const AppRoutes = () => {
-  const { userToken, setUserToken } = useUser()
+  const { isLoggen } = useUser()
+  const { setUserToken } = useContext(UserContext)
 
   useEffect(() => {
-    setUserToken(token)
-  }, [userToken])
-
+    setUserToken(localStorage.getItem('token') || '')
+  }, [])
   return (
     <Router>
-      <UserContextProvider>
-        <ProductsContextProvider>
-          <CartContextProvider>
-            <Navbar />
-            <Switch>
-              <Route path="/" exact component={HomeScreen} />
-              <Route path="/products" exact component={HomeScreen} />
-              <Route
-                path="/products/:id"
-                exact
-                component={SingleProductScreen}
-              />
-              <Route
-                path="/products/category/:name"
-                exact
-                component={ProductsCategorySpecify}
-              />
-              <Route path="/cart" exact component={CartScreen} />
-              <Route path="/login" exact component={LoginScreen} />
-              <Route path="/register" exact component={RegisterScreen} />
-              <Route path="**" component={Error404Screen} />
-            </Switch>
-          </CartContextProvider>
-        </ProductsContextProvider>
-      </UserContextProvider>
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={HomeScreen} />
+        <Route path="/products" exact component={HomeScreen} />
+        <Route path="/products/:id" exact component={SingleProductScreen} />
+        <Route
+          path="/products/category/:name"
+          exact
+          component={ProductsCategorySpecify}
+        />
+        <PrivateRoute
+          isAuthenticated={isLoggen}
+          path="/cart"
+          exact
+          component={CartScreen}
+        />
+        <PublicRoute
+          isAuthenticated={isLoggen}
+          path="/login"
+          exact
+          component={LoginScreen}
+        />
+        <Route path="**" component={Error404Screen} />
+      </Switch>
     </Router>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   Box,
@@ -24,6 +24,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { Link as LinkRouter } from 'react-router-dom'
+import { useUser } from '../hooks/useUser'
 
 interface NavItem {
   label: string
@@ -63,20 +64,8 @@ const NAV_ITEMS: Array<NavItem> = [
     ]
   },
   {
-    label: 'Cart'
-
-    // children: [
-    //   {
-    //     label: 'Job Board',
-    //     subLabel: 'Find your dream design job',
-    //     href: '#'
-    //   },
-    //   {
-    //     label: 'Freelance Projects',
-    //     subLabel: 'An exclusive list for contract work',
-    //     href: '#'
-    //   }
-    // ]
+    label: 'Cart',
+    href: '/cart'
   },
   {
     label: 'WishList',
@@ -245,6 +234,11 @@ const MobileNav = () => {
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure()
+  const { isLoggen, logout } = useUser()
+
+  function handleLogout() {
+    logout()
+  }
 
   return (
     <Box>
@@ -293,29 +287,25 @@ export default function NavBar() {
           direction={'row'}
           spacing={6}
         >
-          <Button
-            as={LinkRouter}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            to={'/login'}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            as={LinkRouter}
-            to={'/register'}
-            _hover={{
-              bg: 'pink.300'
-            }}
-          >
-            Sign Up
-          </Button>
+          {!isLoggen ? (
+            <Button
+              as={LinkRouter}
+              to={'/login'}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'pink.400'}
+              href={'#'}
+              _hover={{
+                bg: 'pink.300'
+              }}
+            >
+              Sign In
+            </Button>
+          ) : (
+            <Button onClick={handleLogout}>Logout</Button>
+          )}
         </Stack>
       </Flex>
 

@@ -7,11 +7,12 @@ interface PublicRouteProps extends RouteProps {
 }
 const PublicRoute = (props: PublicRouteProps) => {
   const { component: Component, isAuthenticated, ...rest } = props
+  console.log('public route', isAuthenticated)
   return (
     <Route
       {...rest}
       component={(props: any) =>
-        !isAuthenticated ? <Component {...props} /> : <Redirect to="/home" />
+        !isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   )

@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
 import useCart from '../hooks/useCart'
+import { useUser } from '../hooks/useUser'
 
 const CartScreen = () => {
+  const { isLoggen } = useUser()
+  const history = useHistory()
+
+  useEffect(() => {
+    if (!isLoggen) {
+      history.push({
+        pathname: '/'
+      })
+    }
+  }, [isLoggen])
   const { cartProducts, setCartProducts } = useCart()
 
   const handleDeleteProductCart = ({ id }: { id: number }) => {

@@ -11,7 +11,9 @@ export const UserContext = React.createContext<UserContextDefaultValues>({
 })
 
 const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userToken, setUserToken] = useState<string>('')
+  const [userToken, setUserToken] = useState<string>(
+    localStorage.getItem('token') || ''
+  )
   return (
     <UserContext.Provider
       value={{
