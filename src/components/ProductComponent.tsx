@@ -11,16 +11,31 @@ import {
   Button,
   Box,
   IconButton,
+  useToast,
   Link as LinkChakra
 } from '@chakra-ui/react'
 import { FaHeart } from 'react-icons/fa'
+import { useUser } from '../hooks/useUser'
 
 const ProductComponent = ({ product }: { product: Product }) => {
+  const { id, title, price, category, image } = product
+
   const { setCartProducts } = useCart()
+  const toast = useToast()
+  const { isLoggen } = useUser()
+
   const handleAddToCartProduct = ({ product }: { product: Product }) => {
     setCartProducts((products) => [...products, product])
   }
-  const { id, title, price, category, image } = product
+  function showToast() {
+    toast({
+      title: 'Sign in',
+      description: 'Hi, For add to favorites / add to cart, you sign in',
+      status: 'warning',
+      duration: 3000,
+      isClosable: true
+    })
+  }
 
   return (
     <Stack
@@ -81,7 +96,11 @@ const ProductComponent = ({ product }: { product: Product }) => {
           _hover={{
             bgColor: 'secondaryAlt'
           }}
-          onClick={() => handleAddToCartProduct({ product })}
+          onClick={
+            isLoggen
+              ? () => handleAddToCartProduct({ product })
+              : () => showToast()
+          }
         >
           Add to cart
         </Button>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import {
   Box,
@@ -25,6 +25,7 @@ import {
 } from '@chakra-ui/icons'
 import { Link as LinkRouter } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
+import LinksPrivateUser from './LinksPrivateUser'
 
 interface NavItem {
   label: string
@@ -62,19 +63,19 @@ const NAV_ITEMS: Array<NavItem> = [
         href: '/products/category/women'
       }
     ]
-  },
-  {
-    label: 'Cart',
-    href: '/cart'
-  },
-  {
-    label: 'WishList',
-    href: '#'
-  },
-  {
-    label: 'Hire Designers',
-    href: '#'
   }
+  // {
+  //   label: 'Cart',
+  //   href: '/cart'
+  // },
+  // {
+  //   label: 'WishList',
+  //   href: '/wishList'
+  // },
+  // {
+  //   label: 'Hire Designers',
+  //   href: '#'
+  // }
 ]
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
@@ -122,7 +123,7 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS.map((navItem, index) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
@@ -141,6 +142,8 @@ const DesktopNav = () => {
                 {navItem.label}
               </Link>
             </PopoverTrigger>
+            {/* Links when the user is loggin */}
+            {index === NAV_ITEMS.length - 1 && <LinksPrivateUser />}
 
             {navItem.children && (
               <PopoverContent
