@@ -33,8 +33,8 @@ const CartScreen = () => {
       <h3>Cart Screen</h3>
       <table>
         <tbody>
-          {cartProducts.map((product) => (
-            <tr key={product.id}>
+          {cartProducts.map((product, index) => (
+            <tr key={`${product.id}-${index}`}>
               <td>
                 <img
                   height="100"

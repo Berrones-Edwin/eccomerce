@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useColorModeValue } from '@chakra-ui/react'
 import { Link as LinkRouter } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
+import useCart from '../hooks/useCart'
 
 const ITEMS = [
   {
@@ -20,6 +21,7 @@ const LinksPrivateUser = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const { isLoggen } = useUser()
+  const { cartProducts } = useCart()
 
   if (!isLoggen) return null
   return (
@@ -38,7 +40,9 @@ const LinksPrivateUser = () => {
             color: linkHoverColor
           }}
         >
-          {item.name}
+          {item.name === 'Cart'
+            ? `${item.name} ( ${cartProducts.length + 1} )`
+            : item.name}
         </Link>
       ))}
     </>

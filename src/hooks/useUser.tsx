@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/UserContextProvider'
 import { signIn } from '../services/auth'
+import useCart from './useCart'
 
 export const useUser = () => {
   const { userToken, setUserToken } = useContext(UserContext)
+  const { setCartProducts } = useCart()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -32,6 +34,7 @@ export const useUser = () => {
 
   const logout = () => {
     setUserToken('')
+    setCartProducts([])
     localStorage.removeItem('token')
   }
 
