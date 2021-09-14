@@ -26,6 +26,13 @@ const ProductComponent = ({ product }: { product: Product }) => {
 
   const handleAddToCartProduct = ({ product }: { product: Product }) => {
     setCartProducts((products) => [...products, product])
+    toast({
+      title: 'Good Choice',
+      description: `The product ${product.title} was added successfully`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true
+    })
   }
   function showToast() {
     toast({

@@ -1,18 +1,20 @@
 import React, { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import PrivateRoute from './PrivateRoute'
+
 import HomeScreen from '../pages/HomeScreen'
 import CartScreen from '../pages/CartScreen'
 import SingleProductScreen from '../pages/SingleProductScreen'
 import ProductsCategorySpecify from '../pages/ProductsCategorySpecifyScreen'
 import Navbar from '../components/Navbar'
 import LoginScreen from '../pages/LoginScreen'
-import RegisterScreen from '../pages/RegisterScreen'
 import Error404Screen from '../pages/Error404Screen'
-import { useUser } from '../hooks/useUser'
 import PublicRoute from './PublicRoute'
-import PrivateRoute from './PrivateRoute'
+import WishListScreen from '../pages/WishListScreen'
+
 import { UserContext } from '../context/UserContextProvider'
+import { useUser } from '../hooks/useUser'
 
 const AppRoutes = () => {
   const { isLoggen } = useUser()
@@ -38,6 +40,12 @@ const AppRoutes = () => {
           path="/cart"
           exact
           component={CartScreen}
+        />
+        <PrivateRoute
+          isAuthenticated={isLoggen}
+          path="/wishlist"
+          exact
+          component={WishListScreen}
         />
         <PublicRoute
           isAuthenticated={isLoggen}

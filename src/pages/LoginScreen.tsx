@@ -5,13 +5,11 @@ import { useUser } from '../hooks/useUser'
 import { useHistory } from 'react-router'
 import {
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
-  Link,
   Stack,
   Image
 } from '@chakra-ui/react'
@@ -58,7 +56,7 @@ const LoginScreen = () => {
                   autoComplete="off"
                   name="username"
                 />
-                <ErrorMessage component="div" name="username" />
+                <ErrorMessage component="section" name="username" />
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
