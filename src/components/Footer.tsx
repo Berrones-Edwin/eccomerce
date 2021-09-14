@@ -74,7 +74,97 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
     </Text>
   )
 }
-
+const LINKS_FOOTER = [
+  {
+    id: 1,
+    title: 'About US',
+    links: [
+      {
+        id: 1,
+        name: 'Who we are',
+        href: '#'
+      },
+      {
+        id: 2,
+        name: 'Quality in the details',
+        href: '#'
+      },
+      {
+        id: 3,
+        name: 'Customer Reviews',
+        href: '#'
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Departaments',
+    links: [
+      {
+        id: 1,
+        name: 'Electronics',
+        href: '#'
+      },
+      {
+        id: 2,
+        name: 'Jewelery',
+        href: '#'
+      },
+      {
+        id: 3,
+        name: 'Men clothing',
+        href: '#'
+      },
+      {
+        id: 4,
+        name: 'Women clothing',
+        href: '#'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Help',
+    links: [
+      {
+        id: 1,
+        name: 'Customer Service',
+        href: '#'
+      },
+      {
+        id: 2,
+        name: 'Size Guide',
+        href: '#'
+      },
+      {
+        id: 3,
+        name: 'Contact US',
+        href: '#'
+      }
+    ]
+  },
+  {
+    id: '4',
+    title: 'Payments & Delivery',
+    links: [
+      {
+        id: 1,
+        name: 'Purchase Team',
+        href: '#'
+      },
+      {
+        id: 2,
+        name: 'Guarantee',
+        href: '#'
+      },
+      {
+        id: 3,
+        name: 'Contact us',
+        href: '#'
+      }
+    ]
+  }
+]
 export default function LargeWithNewsletter() {
   return (
     <Box
@@ -83,16 +173,14 @@ export default function LargeWithNewsletter() {
     >
       <Container as={Stack} maxW={'6xl'} py={10}>
         <SimpleGrid
-          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
+          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr 1fr' }}
           spacing={8}
         >
           <Stack spacing={6}>
             <Box>
               <Logo color={useColorModeValue('gray.700', 'white')} />
             </Box>
-            <Text fontSize={'sm'}>
-              © 2020 Chakra Templates. All rights reserved
-            </Text>
+            <Text fontSize={'sm'}>© 2020. All rights reserved</Text>
             <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
                 <FaTwitter />
@@ -105,44 +193,16 @@ export default function LargeWithNewsletter() {
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
-            <Link href={'#'}>About us</Link>
-            <Link href={'#'}>Blog</Link>
-            <Link href={'#'}>Contact us</Link>
-            <Link href={'#'}>Pricing</Link>
-            <Link href={'#'}>Testimonials</Link>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
-            <Link href={'#'}>Help Center</Link>
-            <Link href={'#'}>Terms of Service</Link>
-            <Link href={'#'}>Legal</Link>
-            <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Satus</Link>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Stay up to date</ListHeader>
-            <Stack direction={'row'}>
-              <Input
-                placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                border={0}
-                _focus={{
-                  bg: 'whiteAlpha.300'
-                }}
-              />
-              <IconButton
-                bg={useColorModeValue('green.400', 'green.800')}
-                color={useColorModeValue('white', 'gray.800')}
-                _hover={{
-                  bg: 'green.600'
-                }}
-                aria-label="Subscribe"
-                icon={<BiMailSend />}
-              />
+          {LINKS_FOOTER.map((link) => (
+            <Stack align={'flex-start'} key={link.id}>
+              <ListHeader>{link.title}</ListHeader>
+              {link.links.map((l) => (
+                <Link key={l.id} href={l.href}>
+                  {l.name}
+                </Link>
+              ))}
             </Stack>
-          </Stack>
+          ))}
         </SimpleGrid>
       </Container>
     </Box>
