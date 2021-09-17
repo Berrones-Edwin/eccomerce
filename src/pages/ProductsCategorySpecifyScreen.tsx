@@ -6,18 +6,19 @@ import GridProducts from '../components/GridProducts'
 import SideBar from '../components/SideBar'
 
 interface ProductsCategorySpecifyInterface {
-  name: string | undefined
+  name: string
 }
 const CATEGORIES = {
-  electronics: 'electronics',
-  jewelery: 'jewelery',
+  ele: 'electronics',
+  jew: 'jewelery',
   men: "men's clothing",
-  women: "women's clothing"
+  wom: "women's clothing"
 }
 const ProductsCategorySpecify = () => {
   const { name } = useParams<ProductsCategorySpecifyInterface>()
+
   const { products, error, loading } = useGetProductsByCategory({
-    category: CATEGORIES[name]
+    category: CATEGORIES[name.slice(0, 3)]
   })
 
   if (error) return <p>Upps. An Error ocurred</p>
