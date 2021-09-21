@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { Product } from '../interfaces/Product'
 import { getProductsByCategory } from '../services/getProductsByCategory'
 
 type categoryType = {
-  category: 'electronics' | 'jewelery' | 'men' | 'women'
+  category: 'electronics' | 'jewelery' | "men's clothing" | "women's clothing"
 }
 export const useGetProductsByCategory = ({ category }: categoryType) => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
