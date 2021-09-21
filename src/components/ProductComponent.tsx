@@ -9,6 +9,7 @@ import {
   Text,
   Badge,
   Button,
+  Flex,
   Box,
   IconButton,
   useToast,
@@ -16,29 +17,33 @@ import {
 } from '@chakra-ui/react'
 import { FaHeart } from 'react-icons/fa'
 import { useUser } from '../hooks/useUser'
+import RatingStart from './RatingStart'
+import { FaCartPlus } from 'react-icons/fa'
 
 const ProductComponent = ({ product }: { product: Product }) => {
-  const { id, title, price, category, image } = product
+  const { id, title, price, image } = product
 
   const { setCartProducts } = useCart()
   const toast = useToast()
   const { isLoggen } = useUser()
 
   const handleAddToCartProduct = ({ product }: { product: Product }) => {
+    if (!isLoggen) {
+      toast({
+        title: 'Sign in',
+        description: 'Hi, For add to favorites / add to cart, you sign in',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true
+      })
+      return
+    }
+
     setCartProducts((products) => [...products, product])
     toast({
       title: 'Good Choice',
       description: `The product ${product.title} was added successfully`,
       status: 'success',
-      duration: 3000,
-      isClosable: true
-    })
-  }
-  function showToast() {
-    toast({
-      title: 'Sign in',
-      description: 'Hi, For add to favorites / add to cart, you sign in',
-      status: 'warning',
       duration: 3000,
       isClosable: true
     })
@@ -50,28 +55,11 @@ const ProductComponent = ({ product }: { product: Product }) => {
       minW={'350px'}
       maxW={'350px'}
       align={'center'}
-      borderRadius={'15px'}
       padding={5}
-      shadow={'md'}
-      height={'450px'}
+      height={'500px'}
       pos={'relative'}
     >
-      <IconButton
-        variant="outline"
-        aria-label="Add to Favorite"
-        icon={<FaHeart />}
-        size={'md'}
-        pos={'absolute'}
-        top={'5px'}
-        right={'5px'}
-        color={'gray.500'}
-        _hover={{
-          color: 'red.500'
-        }}
-        z-index={1}
-        border={0}
-      />
-      <Stack borderRadius={'15px'} width={'100%'} height={'250px'}>
+      <Stack borderRadius={'15px'} width={'100%'} height={'350px'}>
         <LinkChakra as={Link} to={`/products/${id}`} height={'100%'}>
           <Image
             src={image}
@@ -81,37 +69,49 @@ const ProductComponent = ({ product }: { product: Product }) => {
             width={'100%'}
             loading="lazy"
           />
+          {/* <Box onClick={(e) => e.stopPropagation()}>
+            <IconButton
+              variant="outline"
+              aria-label="Add to Favorite"
+              icon={<FaHeart />}
+              size={'lg'}
+              pos={'absolute'}
+              top={'0'}
+              right={'5px'}
+              color={'gray.500'}
+              _hover={{
+                color: 'red.500'
+              }}
+              z-index={1}
+              border={0}
+            />
+          </Box> */}
         </LinkChakra>
       </Stack>
-      <Box maxH={'300px'} minH={'100px'} mb={0}>
-        <Heading as={'h3'} size={'sm'}>
-          {title}
-        </Heading>
-        <span>
-          <Link to={`/products/category/${category}`}>
-            <Badge>{category}</Badge>
-          </Link>
-          <Text size={'md'}>
-            Price $<b>{price}</b>
-          </Text>
-        </span>
-      </Box>
-      <Stack width={'100%'}>
-        <Button
-          color={'white'}
-          bgColor={'secondary'}
-          _hover={{
-            bgColor: 'secondaryAlt'
-          }}
-          onClick={
-            isLoggen
-              ? () => handleAddToCartProduct({ product })
-              : () => showToast()
-          }
-        >
-          Add to cart
-        </Button>
-      </Stack>
+      <Heading as={'h3'} size={'sm'} mb={2}>
+        {title}
+      </Heading>
+
+      <Text size={'lg'}>${price}</Text>
+
+      <RatingStart
+        rating={product.rating.rate}
+        count={product.rating.count}
+        justify={'flex-start'}
+      />
+
+      <IconButton
+        borderRadius={'9999px'}
+        minH={'55px'}
+        minW={'55px'}
+        bgColor={'pink'}
+        position={'absolute'}
+        bottom={'120px'}
+        right={'15px'}
+        aria-label="Add Product To cart"
+        icon={<FaCartPlus />}
+        onClick={() => handleAddToCartProduct({ product })}
+      />
     </Stack>
   )
 }
