@@ -39,11 +39,9 @@ const SingleProductScreen = () => {
   const { isLoggen } = useUser()
   const { setCartProducts } = useCart()
   const toast = useToast()
-  const {
-    products: productsCategory,
-    loading: loadingProductsCategory,
-    error: errorProductsCAtegory
-  } = useGetProductsByCategory({ category: "men's clothing" })
+
+  const { products: productsCategory, loading: loadingProductsCategory } =
+    useGetProductsByCategory({ category: product?.category })
 
   const handleInputChange = (e: any) => {
     setAmount(e.target.value)
@@ -84,15 +82,13 @@ const SingleProductScreen = () => {
   if (loading) return <p>Loading Data....</p>
   if (!product) return <p>The product was not found!! :c</p>
   return (
-    <Stack as={'section'} maxW={'100vw'} align={'center'}>
+    <Stack as={'section'} border={'1px solid blue'} align={'center'}>
       <Stack
         maxW={'90vw'}
         flexDir={{
           base: 'column',
           md: 'row'
         }}
-        maxH={'100vh'}
-        minH={'100vh'}
       >
         <Stack
           as={'article'}
@@ -105,13 +101,7 @@ const SingleProductScreen = () => {
         >
           <Image src={product.image} alt={product.title} loading="lazy" />
         </Stack>
-        <Stack
-          spacing={2}
-          as={'article'}
-          padding={3}
-          width={'100%'}
-          height={'auto'}
-        >
+        <Stack spacing={2} as={'article'} padding={3} width={'100%'}>
           <Heading as={'h3'} size={'lg'}>
             {product.title}
           </Heading>
@@ -324,7 +314,7 @@ const SingleProductScreen = () => {
             {loadingProductsCategory ? (
               'Loading Data...'
             ) : (
-              <GridProducts products={productsCategory} />
+              <GridProducts products={productsCategory.slice(0, 3)} />
             )}
           </Stack>
           {/* End Similar Products  */}

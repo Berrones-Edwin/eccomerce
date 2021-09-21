@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Product } from '../interfaces/Product'
 import { getProductsByCategory } from '../services/getProductsByCategory'
 
-type categoryType = {
+export type categoryType = {
   category: 'electronics' | 'jewelery' | "men's clothing" | "women's clothing"
 }
 export const useGetProductsByCategory = ({ category }: categoryType) => {
