@@ -25,13 +25,13 @@ import { useUser } from '../hooks/useUser'
 import useCart from '../hooks/useCart'
 import { Product } from '../interfaces/Product'
 import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
+import GridProducts from '../components/GridProducts'
+import RatingStart from '../components/RatingStart'
 
 interface SingleProductInterface {
   id: string | undefined
 }
-// const CATEGORY={
 
-// }
 const SingleProductScreen = () => {
   const { id } = useParams<SingleProductInterface>()
   const { product, loading, error } = useGetSingleProduct({ id })
@@ -39,7 +39,11 @@ const SingleProductScreen = () => {
   const { isLoggen } = useUser()
   const { setCartProducts } = useCart()
   const toast = useToast()
-  // useGetProductsByCategory({'category':''})
+  const {
+    products: productsCategory,
+    loading: loadingProductsCategory,
+    error: errorProductsCAtegory
+  } = useGetProductsByCategory({ category: "men's clothing" })
 
   const handleInputChange = (e: any) => {
     setAmount(e.target.value)
@@ -117,23 +121,11 @@ const SingleProductScreen = () => {
                 <b>${product.price}</b>
               </Text>
             </Flex>
-            <Flex width={'70%'} justify={'flex-end'} align={'center'}>
-              <Text>Rating</Text>
-              {Array(5)
-                .fill(0)
-                .map((star, idx) => (
-                  <>
-                    <StarIcon
-                      color={
-                        idx + 1 <= Math.ceil(product.rating.rate)
-                          ? 'teal.500'
-                          : 'gray.300'
-                      }
-                      key={star + idx}
-                    />
-                  </>
-                ))}
-            </Flex>
+            <RatingStart
+              justify={'flex-end'}
+              text={'Rating'}
+              rating={product.rating.rate}
+            />
           </Flex>
           <Text>
             {product.description}. Lorem, ipsum dolor sit amet consectetur
@@ -322,6 +314,20 @@ const SingleProductScreen = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
+          {/* End Reviews & description */}
+          {/* Similar Products  */}
+          <Stack as={'section'}>
+            <Heading as={'h3'} size={'md'}>
+              Similar Products
+            </Heading>
+
+            {loadingProductsCategory ? (
+              'Loading Data...'
+            ) : (
+              <GridProducts products={productsCategory} />
+            )}
+          </Stack>
+          {/* End Similar Products  */}
         </Stack>
       </Stack>
     </Stack>
