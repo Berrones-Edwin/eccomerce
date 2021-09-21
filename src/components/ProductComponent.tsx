@@ -7,18 +7,14 @@ import {
   Image,
   Heading,
   Text,
-  Badge,
-  Button,
-  Flex,
   Box,
   IconButton,
   useToast,
   Link as LinkChakra
 } from '@chakra-ui/react'
-import { FaHeart } from 'react-icons/fa'
+import { FaHeart, FaCartPlus } from 'react-icons/fa'
 import { useUser } from '../hooks/useUser'
 import RatingStart from './RatingStart'
-import { FaCartPlus } from 'react-icons/fa'
 
 const ProductComponent = ({ product }: { product: Product }) => {
   const { id, title, price, image } = product
@@ -69,7 +65,7 @@ const ProductComponent = ({ product }: { product: Product }) => {
             width={'100%'}
             loading="lazy"
           />
-          {/* <Box onClick={(e) => e.stopPropagation()}>
+          <Box onClick={(e) => e.stopPropagation()}>
             <IconButton
               variant="outline"
               aria-label="Add to Favorite"
@@ -85,7 +81,7 @@ const ProductComponent = ({ product }: { product: Product }) => {
               z-index={1}
               border={0}
             />
-          </Box> */}
+          </Box>
         </LinkChakra>
       </Stack>
       <Heading as={'h3'} size={'sm'} mb={2}>
