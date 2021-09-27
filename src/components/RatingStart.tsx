@@ -23,7 +23,7 @@ const RatingStart = ({
           <>
             <StarIcon
               color={idx + 1 <= Math.ceil(rating) ? 'teal.500' : 'gray.300'}
-              key={star + idx}
+              key={idx}
             />
           </>
         ))}
