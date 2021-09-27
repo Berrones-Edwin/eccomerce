@@ -82,7 +82,7 @@ const SingleProductScreen = () => {
   if (loading) return <p>Loading Data....</p>
   if (!product) return <p>The product was not found!! :c</p>
   return (
-    <Stack as={'section'} border={'1px solid blue'} align={'center'}>
+    <Stack as={'section'} align={'center'}>
       <Stack
         maxW={'90vw'}
         flexDir={{
