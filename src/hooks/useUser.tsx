@@ -22,7 +22,6 @@ export const useUser = () => {
         if (resp) {
           localStorage.setItem('token', resp.token)
           setUserToken(resp.token)
-          console.log({ userToken })
           setLoading(false)
         }
       })

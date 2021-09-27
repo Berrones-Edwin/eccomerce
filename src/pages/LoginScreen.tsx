@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 
 const LoginScreen = () => {
-  const { login, isLoggen } = useUser()
+  const { login, isLoggen, loading } = useUser()
   const history = useHistory()
   React.useEffect(() => {
     if (isLoggen) {
@@ -73,8 +73,13 @@ const LoginScreen = () => {
                   align={'start'}
                   justify={'space-between'}
                 ></Stack>
-                <Button type={'submit'} colorScheme={'blue'} variant={'solid'}>
-                  Sign in
+                <Button
+                  disabled={loading}
+                  type={'submit'}
+                  colorScheme={'blue'}
+                  variant={'solid'}
+                >
+                  {loading ? 'Loading...' : 'Sign In'}
                 </Button>
               </Stack>
             </Form>
