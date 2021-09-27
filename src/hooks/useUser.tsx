@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/UserContextProvider'
 import { signIn } from '../services/auth'
 import useCart from './useCart'
+import { useWishList } from './useWishList'
 
 export const useUser = () => {
   const { userToken, setUserToken } = useContext(UserContext)
   const { setCartProducts } = useCart()
+  const { setWishList } = useWishList()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -34,6 +36,7 @@ export const useUser = () => {
   const logout = () => {
     setUserToken('')
     setCartProducts([])
+    setWishList([])
     localStorage.removeItem('token')
   }
 
