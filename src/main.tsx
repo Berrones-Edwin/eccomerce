@@ -7,6 +7,7 @@ import ProductsContextProvider from './context/ProductsContextProvider'
 import CartContextProvider from './context/CartContextProvider'
 import Layout from './components/Layout'
 import { theme } from './theme/theme'
+import WishListContextProvider from './context/WishListContextProvider'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,9 +15,11 @@ ReactDOM.render(
       <UserContextProvider>
         <ProductsContextProvider>
           <CartContextProvider>
-            <Layout>
-              <AppRoutes />
-            </Layout>
+            <WishListContextProvider>
+              <Layout>
+                <AppRoutes />
+              </Layout>
+            </WishListContextProvider>
           </CartContextProvider>
         </ProductsContextProvider>
       </UserContextProvider>
