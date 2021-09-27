@@ -15,11 +15,13 @@ import {
 import { FaHeart, FaCartPlus } from 'react-icons/fa'
 import { useUser } from '../hooks/useUser'
 import RatingStart from './RatingStart'
+import { useWishList } from '../hooks/useWishList'
 
 const ProductComponent = ({ product }: { product: Product }) => {
   const { id, title, price, image } = product
 
   const { setCartProducts } = useCart()
+  const { setWishList } = useWishList()
   const toast = useToast()
   const { isLoggen } = useUser()
 
@@ -54,8 +56,17 @@ const ProductComponent = ({ product }: { product: Product }) => {
         duration: 3000,
         isClosable: true
       })
-      // return
+      return
     }
+
+    setWishList((products) => [...products, product])
+    toast({
+      title: 'Good Choice',
+      description: `The product ${product.title} was added successfully`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true
+    })
   }
 
   return (
