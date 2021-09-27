@@ -228,8 +228,10 @@ const MobileNav = () => {
       p={4}
       display={{ md: 'none' }}
     >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+      {NAV_ITEMS.map((navItem, index) => (
+        <>
+          <MobileNavItem key={navItem.label + index} {...navItem} />
+        </>
       ))}
     </Stack>
   )
