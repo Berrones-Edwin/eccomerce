@@ -41,7 +41,9 @@ const LinksPrivateUser = () => {
           }}
         >
           {item.name === 'Cart'
-            ? `${item.name} ( ${cartProducts.length + 1} )`
+            ? `${item.name} ${
+                cartProducts.length > 1 ? cartProducts.length : ''
+              }`
             : item.name}
         </Link>
       ))}
