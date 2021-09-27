@@ -7,7 +7,7 @@ import {
   Image,
   Heading,
   Text,
-  Box,
+  Button,
   IconButton,
   useToast,
   Link as LinkChakra
@@ -45,6 +45,19 @@ const ProductComponent = ({ product }: { product: Product }) => {
     })
   }
 
+  const handleToWishList = (e: any) => {
+    if (!isLoggen) {
+      toast({
+        title: 'Sign in',
+        description: 'Hi, For add to favorites / add to cart, you sign in',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true
+      })
+      // return
+    }
+  }
+
   return (
     <Stack
       as={'article'}
@@ -65,23 +78,6 @@ const ProductComponent = ({ product }: { product: Product }) => {
             width={'100%'}
             loading="lazy"
           />
-          <Box onClick={(e) => e.stopPropagation()}>
-            <IconButton
-              variant="outline"
-              aria-label="Add to Favorite"
-              icon={<FaHeart />}
-              size={'lg'}
-              pos={'absolute'}
-              top={'0'}
-              right={'5px'}
-              color={'gray.500'}
-              _hover={{
-                color: 'red.500'
-              }}
-              z-index={1}
-              border={0}
-            />
-          </Box>
         </LinkChakra>
       </Stack>
       <Heading as={'h3'} size={'sm'} mb={2}>
@@ -95,7 +91,14 @@ const ProductComponent = ({ product }: { product: Product }) => {
         count={product.rating.count}
         justify={'flex-start'}
       />
-
+      <Button
+        pos={'absolute'}
+        top={'0'}
+        right={'5px'}
+        onClick={(e) => handleToWishList(e)}
+      >
+        <FaHeart />
+      </Button>
       <IconButton
         borderRadius={'9999px'}
         minH={'55px'}

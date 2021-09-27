@@ -13,7 +13,7 @@ import {
   Center
 } from '@chakra-ui/react'
 // import useGetAllProducts from '../hooks/useGetAllProducts'
-import MiniHero from '../components/MiniHero'
+
 import NewsLetter from '../components/NewsLetter'
 import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
 
@@ -148,34 +148,21 @@ function HomeScreen() {
         <NewsLetter />
         {/* Best sellers  */}
         <Stack as={'section'} mt={4}>
-          <Center>
-            <Heading as={'h3'} size={'2xl'}>
-              Best Seller
-            </Heading>
-          </Center>
-
           {loading ? (
             'Loading Data...'
           ) : (
-            <GridProducts products={products.slice(0, 3)} />
+            <>
+              <Center>
+                <Heading as={'h3'} size={'2xl'}>
+                  Best Seller
+                </Heading>
+              </Center>
+              <GridProducts products={products.slice(0, 3)} />
+            </>
           )}
         </Stack>
         {/* End Similar Products  */}
       </Flex>
-      {/* <Stack
-        as={'section'}
-        direction={{
-          base: 'column',
-          md: 'row'
-        }}
-        align={{
-          base: 'center',
-          md: 'flex-start'
-        }}
-      >
-        <GridProducts products={products} />
-        <SideBar />
-      </Stack> */}
     </>
   )
 }
