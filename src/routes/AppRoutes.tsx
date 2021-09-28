@@ -7,12 +7,14 @@ import HomeScreen from '../pages/HomeScreen'
 import CartScreen from '../pages/CartScreen'
 import SingleProductScreen from '../pages/SingleProductScreen'
 import ProductsCategorySpecify from '../pages/ProductsCategorySpecifyScreen'
-import Navbar from '../components/Navbar'
+
 import LoginScreen from '../pages/LoginScreen'
 import Error404Screen from '../pages/Error404Screen'
-import PublicRoute from './PublicRoute'
 import WishListScreen from '../pages/WishListScreen'
+import ProductsScreen from '../pages/ProductsScreen'
 
+import PublicRoute from './PublicRoute'
+import Navbar from '../components/Navbar'
 import { UserContext } from '../context/UserContextProvider'
 import { useUser } from '../hooks/useUser'
 
@@ -28,7 +30,7 @@ const AppRoutes = () => {
       <Navbar />
       <Switch>
         <Route path="/" exact component={HomeScreen} />
-        <Route path="/products" exact component={HomeScreen} />
+        <Route path="/products" exact component={ProductsScreen} />
         <Route path="/products/:id" exact component={SingleProductScreen} />
         <Route
           path="/products/category/:name"
