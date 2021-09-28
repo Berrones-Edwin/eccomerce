@@ -40,6 +40,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/'
   },
   {
+    label: 'Products',
+    href: '/products'
+  },
+  {
     label: 'Categories',
     children: [
       {
