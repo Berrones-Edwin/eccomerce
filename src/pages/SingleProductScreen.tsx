@@ -27,6 +27,7 @@ import { Product } from '../interfaces/Product'
 import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
 import GridProducts from '../components/GridProducts'
 import RatingStart from '../components/RatingStart'
+import LoadingScreen from '../components/LoadingScreen'
 
 interface SingleProductInterface {
   id: string | undefined
@@ -79,7 +80,7 @@ const SingleProductScreen = () => {
   }
 
   if (error) return <p>Upps. An Error ocurred</p>
-  if (loading) return <p>Loading Data....</p>
+  if (loading) return <LoadingScreen />
   if (!product) return <p>The product was not found!! :c</p>
   return (
     <Stack as={'section'} align={'center'}>

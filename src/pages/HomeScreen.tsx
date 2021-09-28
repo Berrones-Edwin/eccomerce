@@ -1,6 +1,5 @@
 import React from 'react'
 import GridProducts from '../components/GridProducts'
-import SideBar from '../components/SideBar'
 import {
   Stack,
   Text,
@@ -12,18 +11,12 @@ import {
   GridItem,
   Center
 } from '@chakra-ui/react'
-// import useGetAllProducts from '../hooks/useGetAllProducts'
 
 import NewsLetter from '../components/NewsLetter'
 import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
+import Loader from '../components/Loader/Loader'
 
 function HomeScreen() {
-  // const { products, loading, error } = useGetAllProducts()
-
-  // if (error) return <p>Upps. An Error ocurred</p>
-  // if (loading) return <p>Loading Data....</p>
-  // if (products.length === 0) return <p>The products is empty!!</p>
-
   const { products, loading } = useGetProductsByCategory({
     category: "women's clothing"
   })
@@ -149,7 +142,10 @@ function HomeScreen() {
         {/* Best sellers  */}
         <Stack as={'section'} mt={4}>
           {loading ? (
-            'Loading Data...'
+            <>
+              <Loader />
+              <Text>Loading Data...</Text>
+            </>
           ) : (
             <>
               <Center>
