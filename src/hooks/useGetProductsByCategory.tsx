@@ -5,7 +5,7 @@ import { getProductsByCategory } from '../services/getProductsByCategory'
 export type categoryType = {
   category: 'electronics' | 'jewelery' | "men's clothing" | "women's clothing"
 }
-export const useGetProductsByCategory = ({ category }: categoryType) => {
+export const useGetProductsByCategory = ({ category }: { category: any }) => {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)

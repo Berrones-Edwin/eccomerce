@@ -9,17 +9,12 @@ import LoadingScreen from '../components/LoadingScreen'
 interface ProductsCategorySpecifyInterface {
   name: string
 }
-const CATEGORIES = {
-  ele: 'electronics',
-  jew: 'jewelery',
-  men: "men's clothing",
-  wom: "women's clothing"
-}
+
 const ProductsCategorySpecify = () => {
   const { name } = useParams<ProductsCategorySpecifyInterface>()
 
   const { products, error, loading } = useGetProductsByCategory({
-    category: CATEGORIES[name.slice(0, 3)]
+    category: name
   })
 
   if (error) return <p>Upps. An Error ocurred</p>

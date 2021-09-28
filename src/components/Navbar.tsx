@@ -31,7 +31,7 @@ interface NavItem {
   label: string
   subLabel?: string
   children?: Array<NavItem>
-  href?: string | unknown
+  href: string
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -45,6 +45,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Categories',
+    href: '',
     children: [
       {
         label: 'Electronics',
@@ -59,12 +60,12 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'Men clothing',
         subLabel: 'Trending Design to inspire you',
-        href: '/products/category/men'
+        href: "/products/category/men's clothing"
       },
       {
         label: 'Women clothing',
         subLabel: 'Trending Design to inspire you',
-        href: '/products/category/women'
+        href: "/products/category/women's clothing"
       }
     ]
   }
