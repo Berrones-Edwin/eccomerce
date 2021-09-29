@@ -87,7 +87,7 @@ const LinksPrivateUser = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            {cartProducts.length === 0 && (
+            {cartProducts.length === 0 ? (
               <Button
                 size={'md'}
                 onClick={onClose}
@@ -96,10 +96,11 @@ const LinksPrivateUser = () => {
               >
                 Start Shopping
               </Button>
+            ) : (
+              <Button size={'md'} width={'100%'} colorScheme="blue">
+                Go to checkout
+              </Button>
             )}
-            <Button size={'md'} width={'100%'} colorScheme="blue">
-              Go to checkout
-            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
