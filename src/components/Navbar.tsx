@@ -285,7 +285,7 @@ export default function NavBar() {
           direction={'row'}
           spacing={6}
         >
-          {!isLoggen ? (
+          {!isLoggen && (
             <Button
               as={LinkRouter}
               to={'/login'}
@@ -301,9 +301,8 @@ export default function NavBar() {
             >
               Sign In
             </Button>
-          ) : (
-            <Button onClick={handleLogout}>Logout</Button>
           )}
+          <Button onClick={handleLogout}>Logout</Button>
         </Stack>
       </Flex>
 
