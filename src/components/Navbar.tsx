@@ -69,18 +69,6 @@ const NAV_ITEMS: Array<NavItem> = [
       }
     ]
   }
-  // {
-  //   label: 'Cart',
-  //   href: '/cart'
-  // },
-  // {
-  //   label: 'WishList',
-  //   href: '/wishList'
-  // },
-  // {
-  //   label: 'Hire Designers',
-  //   href: '#'
-  // }
 ]
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
@@ -235,7 +223,7 @@ const MobileNav = () => {
     >
       {NAV_ITEMS.map((navItem, index) => (
         <>
-          <MobileNavItem key={navItem.label + index} {...navItem} />
+          <MobileNavItem key={navItem.label + '-' + index} {...navItem} />
         </>
       ))}
     </Stack>

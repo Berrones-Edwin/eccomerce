@@ -11,8 +11,6 @@ import {
   Select,
   Link,
   Button,
-  FormControl,
-  Input,
   Tabs,
   TabList,
   Tab,
@@ -28,6 +26,7 @@ import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
 import GridProducts from '../components/GridProducts'
 import RatingStart from '../components/RatingStart'
 import LoadingScreen from '../components/LoadingScreen'
+import AmountCounter from '../components/AmountCounter'
 
 interface SingleProductInterface {
   id: string | undefined
@@ -36,25 +35,13 @@ interface SingleProductInterface {
 const SingleProductScreen = () => {
   const { id } = useParams<SingleProductInterface>()
   const { product, loading, error } = useGetSingleProduct({ id })
-  const [amount, setAmount] = useState(1)
   const { isLoggen } = useUser()
   const { setCartProducts } = useCart()
   const toast = useToast()
+  const [amount, setAmount] = useState(0)
 
   const { products: productsCategory, loading: loadingProductsCategory } =
     useGetProductsByCategory({ category: product?.category })
-
-  const handleInputChange = (e: any) => {
-    setAmount(e.target.value)
-  }
-
-  const handlePlusAmountProduct = () => {
-    setAmount(amount + 1)
-  }
-  const handleRestAmountProduct = () => {
-    if (amount > 1) setAmount(amount - 1)
-    else setAmount(1)
-  }
 
   const hanldeAddProductToCart = ({ product }: { product: Product }) => {
     if (!isLoggen) {
@@ -67,9 +54,11 @@ const SingleProductScreen = () => {
       })
       return
     }
-    for (let i = 0; i < amount; i++) {
+
+    for (let index = 0; index < amount; index++) {
       setCartProducts((products) => [...products, product])
     }
+
     toast({
       title: 'Good Choice',
       description: `The product ${product.title} was added successfully`,
@@ -205,30 +194,8 @@ const SingleProductScreen = () => {
             }}
             spacing={4}
           >
-            <form>
-              <Flex>
-                <Button onClick={handleRestAmountProduct} bgColor={'gray.300'}>
-                  {' '}
-                  -{' '}
-                </Button>
-                <FormControl>
-                  <Input
-                    type="number"
-                    value={amount}
-                    name="amountProduct"
-                    id="amountProduct"
-                    textAlign="center"
-                    width={'100px'}
-                    border={'1px solid gray'}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <Button onClick={handlePlusAmountProduct} bgColor={'gray.300'}>
-                  {' '}
-                  +{' '}
-                </Button>
-              </Flex>
-            </form>
+            <AmountCounter setAmount={setAmount} />
+
             <Button
               onClick={() => hanldeAddProductToCart({ product })}
               width={'xs'}
@@ -241,7 +208,6 @@ const SingleProductScreen = () => {
               Pick Up in store
             </Button>
           </Stack>
-          {/* <h3>Reviews</h3> */}
           {/* End Amount  */}
           {/* Reviews & description */}
           <Tabs variant="enclosed">
