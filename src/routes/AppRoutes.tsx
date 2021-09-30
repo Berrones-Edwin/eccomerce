@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
 import HomeScreen from '../pages/HomeScreen'
-import CartScreen from '../pages/CartScreen'
 import SingleProductScreen from '../pages/SingleProductScreen'
 import ProductsCategorySpecify from '../pages/ProductsCategorySpecifyScreen'
 
@@ -36,12 +35,6 @@ const AppRoutes = () => {
           path="/products/category/:name"
           exact
           component={ProductsCategorySpecify}
-        />
-        <PrivateRoute
-          isAuthenticated={isLoggen}
-          path="/cart"
-          exact
-          component={CartScreen}
         />
         <PrivateRoute
           isAuthenticated={isLoggen}
