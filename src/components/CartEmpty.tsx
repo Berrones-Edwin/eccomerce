@@ -9,7 +9,7 @@ const CartEmpty = () => {
       h={'100%'}
       spacing={3}
     >
-      <Image src={'./assets/empty-cart.svg'} />
+      <Image src={'/assets/empty-cart.svg'} />
       <Heading size={'lg'}>Your bag is empty!!</Heading>
       <Text>
         Looks like you haven't added any items to the bag yet. Start shopping to
