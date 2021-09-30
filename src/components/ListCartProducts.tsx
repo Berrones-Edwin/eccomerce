@@ -33,7 +33,7 @@ const ListCartProducts = ({ product }: { product: Product }) => {
         <Stack w={'50%'} align={'center'} justify={'center'}>
           <Text size={'sm'}>{product.title}</Text>
           <Text>$ {product.price}</Text>
-          <Button colorScheme="blackAlpha" onClick={handleSaveForLater}>
+          <Button colorScheme="blue" onClick={handleSaveForLater}>
             Save for Later
           </Button>
         </Stack>

@@ -107,6 +107,7 @@ const ProductComponent = ({ product }: { product: Product }) => {
         top={'0'}
         right={'5px'}
         onClick={(e) => handleToWishList(e)}
+        colorScheme="red"
       >
         <FaHeart />
       </Button>
@@ -114,7 +115,7 @@ const ProductComponent = ({ product }: { product: Product }) => {
         borderRadius={'9999px'}
         minH={'55px'}
         minW={'55px'}
-        bgColor={'pink'}
+        colorScheme={'pink'}
         position={'absolute'}
         bottom={'120px'}
         right={'15px'}
