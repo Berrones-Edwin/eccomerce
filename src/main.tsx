@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppRoutes from './routes/AppRoutes'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import UserContextProvider from './context/UserContextProvider'
 import ProductsContextProvider from './context/ProductsContextProvider'
 import CartContextProvider from './context/CartContextProvider'
@@ -17,6 +17,7 @@ ReactDOM.render(
           <CartContextProvider>
             <WishListContextProvider>
               <Layout>
+                <ColorModeScript initialColorMode="light" />
                 <AppRoutes />
               </Layout>
             </WishListContextProvider>

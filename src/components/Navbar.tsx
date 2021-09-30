@@ -26,6 +26,8 @@ import {
 import { Link as LinkRouter } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
 import LinksPrivateUser from './LinksPrivateUser'
+import MenuListAvatar from './MenuListAvatar'
+import LinksPrivateUserMobile from './LinksPrivateUserMobile'
 
 interface NavItem {
   label: string
@@ -168,8 +170,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
-        href={href ?? '#'}
+        as={LinkRouter}
+        to={href ?? '#'}
         justify={'space-between'}
         align={'center'}
         _hover={{
@@ -182,6 +184,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {label}
         </Text>
+
         {children && (
           <Icon
             as={ChevronDownIcon}
@@ -224,6 +227,7 @@ const MobileNav = () => {
       {NAV_ITEMS.map((navItem, index) => (
         <>
           <MobileNavItem key={navItem.label + '-' + index} {...navItem} />
+          {index === NAV_ITEMS.length - 1 && <LinksPrivateUserMobile />}
         </>
       ))}
     </Stack>
@@ -232,11 +236,7 @@ const MobileNav = () => {
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure()
-  const { isLoggen, logout } = useUser()
-
-  function handleLogout() {
-    logout()
-  }
+  const { isLoggen } = useUser()
 
   return (
     <Box>
@@ -285,9 +285,10 @@ export default function NavBar() {
           direction={'row'}
           spacing={6}
         >
-          {Boolean(isLoggen)}
           {isLoggen ? (
-            <Button onClick={handleLogout}>Logout</Button>
+            <>
+              <MenuListAvatar />
+            </>
           ) : (
             <Button
               as={LinkRouter}
