@@ -11,12 +11,11 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-  Image,
   Stack,
-  Flex,
-  FormControl,
-  Input,
-  Text
+  Table,
+  Tbody,
+  Tr,
+  Td
 } from '@chakra-ui/react'
 import { Link as LinkRouter } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
@@ -29,7 +28,7 @@ const LinksPrivateUser = () => {
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isLoggen } = useUser()
-  const { cartProducts } = useCart()
+  const { cartProducts, calculateTotalProducts } = useCart()
 
   if (!isLoggen) return null
 
@@ -97,9 +96,43 @@ const LinksPrivateUser = () => {
                 Start Shopping
               </Button>
             ) : (
-              <Button size={'md'} width={'100%'} colorScheme="blue">
-                Go to checkout
-              </Button>
+              <>
+                <Stack minW={'100%'} minH={'100%'} direction="column">
+                  <Table variant="simple">
+                    <Tbody>
+                      <Tr>
+                        <Td>Subtotal</Td>
+                        <Td isNumeric>
+                          {' '}
+                          <b> ${calculateTotalProducts()} </b>
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td>Shipping & Handling</Td>
+                        <Td isNumeric>
+                          {' '}
+                          <b>$0.00</b>{' '}
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td>Discount:</Td>
+                        <Td isNumeric>
+                          <b>$0.00</b>
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td>Total:</Td>
+                        <Td isNumeric>
+                          <b> ${calculateTotalProducts()} </b>
+                        </Td>
+                      </Tr>
+                    </Tbody>
+                  </Table>
+                  <Button size={'md'} width={'100%'} colorScheme="blue">
+                    Go to checkout
+                  </Button>
+                </Stack>
+              </>
             )}
           </DrawerFooter>
         </DrawerContent>
