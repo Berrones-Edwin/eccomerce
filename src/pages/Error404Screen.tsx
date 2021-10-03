@@ -11,7 +11,7 @@ const Error404Screen = () => {
       minW={'100vw'}
       minH={'100vh'}
     >
-      <Image width={200} heigth={200} src="/public/error404.svg" />
+      <Image width={200} heigth={200} src="/error404.svg" />
       <Heading>We cant find the page</Heading>
       <Text>Unfortunely we cant find the page you are looking for.</Text>
       <Button variant={'solid'} size={'lg'} as={Link} to={'/'}>
