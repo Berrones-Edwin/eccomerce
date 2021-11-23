@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Stack, Heading, Button, Checkbox } from '@chakra-ui/react'
 import { categories } from '../data/categories'
+import useGetAllProducts from '../hooks/useGetAllProducts'
+import { Product } from '../interfaces/Product'
 const SideBar = () => {
+  const { products, setProducts } = useGetAllProducts()
+  const [mirrorProducts] = useState<Product[]>(products)
+
+  const filterProductsByCategory = (e: ChangeEvent<HTMLInputElement>) => {
+    setProducts(mirrorProducts as Product[])
+
+    if (e.target.checked) {
+      const newProducts = products.filter((p) => p.category === e.target.name)
+      setProducts(newProducts)
+    }
+  }
   return (
     <Stack
       minW={'250px'}
@@ -14,11 +27,21 @@ const SideBar = () => {
         Categories
       </Heading>
       <Stack spacing={3} direction="column">
-        <Checkbox defaultIsChecked colorScheme="green">
+        <Checkbox
+          defaultIsChecked
+          colorScheme="green"
+          onChange={(e) => filterProductsByCategory(e)}
+          name="all"
+        >
           All
         </Checkbox>
         {categories.map((category) => (
-          <Checkbox key={category.id} colorScheme="green">
+          <Checkbox
+            key={category.id}
+            onChange={(e) => filterProductsByCategory(e)}
+            name={category.name}
+            colorScheme="green"
+          >
             {category.name}
           </Checkbox>
         ))}

@@ -11,10 +11,10 @@ export const categories: Array<Categories> = [
   },
   {
     id: 3,
-    name: 'men clothing'
+    name: "men's clothing"
   },
   {
     id: 4,
-    name: 'women clothing'
+    name: "women's clothing"
   }
 ]

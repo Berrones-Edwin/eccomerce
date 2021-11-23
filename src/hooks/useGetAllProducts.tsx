@@ -18,6 +18,7 @@ const useGetAllProducts = () => {
         .then((listProducts: Product[]) => {
           if (listProducts) {
             setProducts(listProducts)
+
             saveData<Product[]>({ key: 'products', data: listProducts })
             setLoading(false)
           }
@@ -32,7 +33,8 @@ const useGetAllProducts = () => {
   return {
     products,
     loading,
-    error
+    error,
+    setProducts
   }
 }
 
