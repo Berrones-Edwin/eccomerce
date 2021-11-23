@@ -6,26 +6,16 @@ import {
   Avatar,
   MenuList,
   MenuItem,
-  MenuDivider,
-  IconButton,
-  useColorMode
+  MenuDivider
 } from '@chakra-ui/react'
 import { useUser } from '../hooks/useUser'
-import { FaMoon, FaSun } from 'react-icons/fa'
+import ButtonTheme from './ButtonTheme'
 
 const MenuListAvatar = () => {
   const { logout } = useUser()
-  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
-      <IconButton
-        isRound={true}
-        icon={colorMode === 'dark' ? <FaMoon /> : <FaSun />}
-        size="md"
-        alignSelf="flex-end"
-        onClick={toggleColorMode}
-        aria-label="button"
-      />
+      <ButtonTheme />
       <Menu>
         <MenuButton
           as={Button}

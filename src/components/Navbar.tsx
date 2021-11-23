@@ -28,6 +28,7 @@ import { useUser } from '../hooks/useUser'
 import LinksPrivateUser from './LinksPrivateUser'
 import MenuListAvatar from './MenuListAvatar'
 import LinksPrivateUserMobile from './LinksPrivateUserMobile'
+import ButtonTheme from './ButtonTheme'
 
 interface NavItem {
   label: string
@@ -226,7 +227,10 @@ const MobileNav = () => {
     >
       {NAV_ITEMS.map((navItem, index) => (
         <>
-          <MobileNavItem key={navItem.label + '-' + index + Date.now()} {...navItem} />
+          <MobileNavItem
+            key={navItem.label + '-' + index + Date.now()}
+            {...navItem}
+          />
           {index === NAV_ITEMS.length - 1 && <LinksPrivateUserMobile />}
         </>
       ))}
@@ -290,21 +294,24 @@ export default function NavBar() {
               <MenuListAvatar />
             </>
           ) : (
-            <Button
-              as={LinkRouter}
-              to={'/login'}
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'pink.400'}
-              href={'#'}
-              _hover={{
-                bg: 'pink.300'
-              }}
-            >
-              Sign In
-            </Button>
+            <>
+              <ButtonTheme />
+              <Button
+                as={LinkRouter}
+                to={'/login'}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'pink.400'}
+                href={'#'}
+                _hover={{
+                  bg: 'pink.300'
+                }}
+              >
+                Sign In
+              </Button>
+            </>
           )}
         </Stack>
       </Flex>
