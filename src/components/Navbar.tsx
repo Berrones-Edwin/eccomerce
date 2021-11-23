@@ -226,7 +226,7 @@ const MobileNav = () => {
     >
       {NAV_ITEMS.map((navItem, index) => (
         <>
-          <MobileNavItem key={navItem.label + '-' + index} {...navItem} />
+          <MobileNavItem key={navItem.label + '-' + index + Date.now()} {...navItem} />
           {index === NAV_ITEMS.length - 1 && <LinksPrivateUserMobile />}
         </>
       ))}
