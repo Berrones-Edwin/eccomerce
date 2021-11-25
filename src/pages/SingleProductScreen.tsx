@@ -204,7 +204,7 @@ const SingleProductScreen = () => {
             >
               Add to Cart
             </Button>
-            <Button width={'xs'} colorScheme={'blackAlpha'} size={'lg'}>
+            <Button width={'xs'} colorScheme={'teal'} size={'lg'}>
               Pick Up in store
             </Button>
           </Stack>
