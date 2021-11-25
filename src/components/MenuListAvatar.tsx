@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useUser } from '../hooks/useUser'
 import ButtonTheme from './ButtonTheme'
+import { Link } from 'react-router-dom'
 
 const MenuListAvatar = () => {
   const { logout } = useUser()
@@ -32,7 +33,9 @@ const MenuListAvatar = () => {
           />
         </MenuButton>
         <MenuList>
-          <MenuItem>Settings User</MenuItem>
+          <MenuItem as={Link} to="/settings">
+            Settings User
+          </MenuItem>
           <MenuDivider />
           <MenuItem onClick={logout}>Logout</MenuItem>
         </MenuList>
