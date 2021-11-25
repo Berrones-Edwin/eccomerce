@@ -6,6 +6,8 @@ import PublicRoute from './PublicRoute'
 import Navbar from '../components/Navbar'
 import { UserContext } from '../context/UserContextProvider'
 import { useUser } from '../hooks/useUser'
+import ShippingDetails from '../pages/ShippingDetails'
+import ProfileScreen from '../pages/ProfileScreen'
 
 const HomeScreen = lazy(() => import('../pages/HomeScreen'))
 const SingleProductScreen = lazy(() => import('../pages/SingleProductScreen'))
@@ -47,7 +49,6 @@ const AppRoutes = () => {
           <PrivateRoute
             isAuthenticated={isLoggen}
             path="/settings"
-            exact
             component={SettingsScreen}
           />
           <PublicRoute
