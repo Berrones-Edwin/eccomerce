@@ -78,7 +78,7 @@ const FormSettingsUserPassword = () => {
           />
         </FormControl>
       </Flex>
-      <Button type="submit" mb={'1rem'} bgColor="green" type="submit">
+      <Button type="submit" mb={'1rem'} bgColor="green">
         Update password
       </Button>
     </form>
