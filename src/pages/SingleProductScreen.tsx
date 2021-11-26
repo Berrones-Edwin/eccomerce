@@ -27,6 +27,8 @@ import GridProducts from '../components/GridProducts'
 import RatingStart from '../components/RatingStart'
 import LoadingScreen from '../components/LoadingScreen'
 import AmountCounter from '../components/AmountCounter'
+import ServerDownScreen from '../components/ServerDownScreen'
+import ProductNotFound from '../components/ProductNotFound'
 
 interface SingleProductInterface {
   id: string | undefined
@@ -68,9 +70,9 @@ const SingleProductScreen = () => {
     })
   }
 
-  if (error) return <p>Upps. An Error ocurred</p>
+  if (error) return <ServerDownScreen />
   if (loading) return <LoadingScreen />
-  if (!product) return <p>The product was not found!! :c</p>
+  if (!product) return <ProductNotFound />
   return (
     <Stack as={'section'} align={'center'}>
       <Stack

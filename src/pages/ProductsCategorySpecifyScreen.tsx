@@ -5,6 +5,8 @@ import { Stack } from '@chakra-ui/react'
 import GridProducts from '../components/GridProducts'
 import SideBar from '../components/SideBar'
 import LoadingScreen from '../components/LoadingScreen'
+import ServerDownScreen from '../components/ServerDownScreen'
+import ProductNotFound from '../components/ProductNotFound'
 
 interface ProductsCategorySpecifyInterface {
   name: string
@@ -17,9 +19,9 @@ const ProductsCategorySpecify = () => {
     category: name
   })
 
-  if (error) return <p>Upps. An Error ocurred</p>
+  if (error) return <ServerDownScreen />
   if (loading) return <LoadingScreen />
-  if (products.length === 0) return <p>The products is empty!!</p>
+  if (products.length === 0) return <ProductNotFound />
 
   return (
     <>

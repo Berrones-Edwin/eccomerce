@@ -4,11 +4,12 @@ import GridProducts from '../components/GridProducts'
 import SideBar from '../components/SideBar'
 import LoadingScreen from '../components/LoadingScreen'
 import useGetAllProducts from '../hooks/useGetAllProducts'
+import ServerDownScreen from '../components/ServerDownScreen'
 
 const ProductsScreen = () => {
   const { products, loading, error } = useGetAllProducts()
 
-  if (error) return <p>Upps. An Error ocurred</p>
+  if (error) return <ServerDownScreen />
   if (loading) return <LoadingScreen />
   if (products.length === 0) return <p>The products is empty!!</p>
   return (

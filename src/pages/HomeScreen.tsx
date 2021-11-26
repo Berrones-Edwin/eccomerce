@@ -14,7 +14,7 @@ import {
 
 import NewsLetter from '../components/NewsLetter'
 import { useGetProductsByCategory } from '../hooks/useGetProductsByCategory'
-import Loader from '../components/Loader/Loader'
+import LoadingScreen from '../components/LoadingScreen'
 
 function HomeScreen() {
   const { products, loading } = useGetProductsByCategory({
@@ -143,8 +143,7 @@ function HomeScreen() {
         <Stack as={'section'} mt={4}>
           {loading ? (
             <>
-              <Loader />
-              <Text>Loading Data...</Text>
+              <LoadingScreen />
             </>
           ) : (
             <>
